@@ -1,0 +1,10 @@
+insert into category (description) values ('Indian');
+insert into category (description) values ('Chinese');
+insert into category (description) values ('Tandoor');
+insert into category (description) values ('Italian');
+insert into UNIT_OF_MEASURE (UNIT_OF_MEASURE ) values ('Each');
+insert into UNIT_OF_MEASURE (UNIT_OF_MEASURE ) values ('Teaspoon');
+insert into UNIT_OF_MEASURE (UNIT_OF_MEASURE ) values ('Tablespoon');
+insert into UNIT_OF_MEASURE (UNIT_OF_MEASURE ) values ('Cup');
+insert into UNIT_OF_MEASURE (UNIT_OF_MEASURE ) values ('Pint');
+insert into UNIT_OF_MEASURE (UNIT_OF_MEASURE ) values ('Dash');
