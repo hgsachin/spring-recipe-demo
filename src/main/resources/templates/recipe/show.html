@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Details</title>
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" th:href="@{/webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous" th:href="@{/webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div class="container-fluid justify-content-center pb-md-2">
+        <div class="jumbotron text-center">
+            <h1 th:text="${recipe.description}"></h1>
+        </div>
+    </div>
+    <div class="container justify-content-center pb-4">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col">
+                    <h5>Prep Time: </h5>
+                </div>
+                <div class="col">
+                    <p th:text="${recipe.prepTime + ' min'}"></p>
+                </div>
+                <div class="col">
+                    <h5>Difficulty: </h5>
+                </div>
+                <div class="col">
+                    <p th:text="${recipe.difficulty}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Cook Time: </h5>
+                </div>
+                <div class="col">
+                    <p th:text="${recipe.cookTime + ' min'}"></p>
+                </div>
+                <div class="col">
+                    <h5>Servings: </h5>
+                </div>
+                <div class="col">
+                    <p th:text="${recipe.servings}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Source: </h5>
+                </div>
+                <div class="col">
+                    <p th:text="${recipe.source}"></p>
+                </div>
+                <div class="col">
+                    <h5>URL: </h5>
+                </div>
+                <div class="col">
+                    <p th:text="${recipe.url}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 container">
+        <table class="table table-secondary justify-content-left">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center header-panel">Ingredients</th>
+                </tr>
+            </thead>
+            <tr th:each="ingredient: ${recipe.ingredients}">
+                <td th:text="${ingredient.amount + ' ' + ingredient.unitOfMeasure.unitOfMeasure}">NA</td>
+                <td th:text="${ingredient.description}">NO Data</td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <h3>Directions: </h3>
+        <p th:text="${recipe.directions}"></p>
+    </div>
+    <div class="container">
+        <h3>Notes: </h3>
+        <p th:text="${recipe.notes.recipeNotes}"></p>
+    </div>
+</body>
+</html>
