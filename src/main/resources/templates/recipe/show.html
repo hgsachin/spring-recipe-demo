@@ -14,7 +14,7 @@
 <body>
     <div class="container-fluid justify-content-center pb-md-2">
         <div class="jumbotron text-center">
-            <h1 th:text="${recipe.description}"></h1>
+            <h1 class="text-uppercase" th:text="${recipe.description}"></h1>
         </div>
     </div>
     <div class="container justify-content-center pb-4">
@@ -30,7 +30,7 @@
                     <h5>Difficulty: </h5>
                 </div>
                 <div class="col">
-                    <p th:text="${recipe.difficulty}"></p>
+                    <p class="text-capitalize" th:text="${recipe.difficulty}"></p>
                 </div>
             </div>
             <div class="row">
@@ -67,12 +67,18 @@
         <table class="table table-secondary justify-content-left">
             <thead>
                 <tr>
-                    <th colspan="2" class="text-center header-panel">Ingredients</th>
+                    <th colspan="2" class="text-center header-panel">
+                        Ingredients
+                        <a class="btn btn-outline-info float-right"
+                           th:href="${'/recipe/' + recipe.id + '/ingredients'}">
+                            View All
+                        </a>
+                    </th>
                 </tr>
             </thead>
             <tr th:each="ingredient: ${recipe.ingredients}">
-                <td th:text="${ingredient.amount + ' ' + ingredient.unitOfMeasure.unitOfMeasure}">NA</td>
-                <td th:text="${ingredient.description}">NO Data</td>
+                <td class="text-capitalize" th:text="${ingredient.amount + ' ' + ingredient.unitOfMeasure.unitOfMeasure}">NA</td>
+                <td class="text-capitalize" th:text="${ingredient.description}">NO Data</td>
             </tr>
         </table>
     </div>

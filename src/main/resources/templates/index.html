@@ -21,13 +21,18 @@
                 <th scope="col">ID</th>
                 <th scope="col">Recipe Desc</th>
                 <th scope="col">View</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
             </tr>
             <tr th:each="recipe: ${recipes}">
                 <td th:text="${recipe.id}">NA</td>
                 <td th:text="${recipe.description}">NO Data</td>
-                <td><a th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
+                <td><a th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
+                <td><a th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
+                <td><a th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
             </tr>
         </table>
+        <a class="btn btn-success" href="/recipe/new">Add New Recipe</a>
     </div>
 </body>
 </html>
