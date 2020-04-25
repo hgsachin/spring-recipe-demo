@@ -2,13 +2,18 @@ package com.hgsachin.springrecipedemo.controllers;
 
 import com.hgsachin.springrecipedemo.commands.RecipeCommand;
 import com.hgsachin.springrecipedemo.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 public class RecipeController {
 
@@ -42,9 +47,12 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    @PostMapping
-    @RequestMapping("/recipe")
-    public String addOrUpdateRecipe(@ModelAttribute RecipeCommand recipeCommand) {
+    @PostMapping("/recipe")
+    public String addOrUpdateRecipe(@Valid @ModelAttribute("recipe") RecipeCommand recipeCommand, BindingResult result) {
+        if (result.hasErrors()) {
+            result.getAllErrors().forEach(err -> log.error(err.toString()));
+            return "recipe/recipeForm";
+        }
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(recipeCommand);
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }

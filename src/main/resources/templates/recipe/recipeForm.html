@@ -18,6 +18,9 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form  th:object="${recipe}" th:action="@{/recipe/}"  method="post">
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Please Correct Errors Below</p>
+                </div>
                 <input type="hidden" th:field="*{id}"/>
                 <div class="panel-group">
                     <div class="panel panel-primary">
@@ -28,7 +31,13 @@
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Recipe Description:</label>
-                                    <input type="text" class="form-control" th:field="*{description}"/>
+                                    <input type="text" class="form-control" th:field="*{description}" th:class="${#fields.hasErrors('description')}
+                                        ? 'is-invalid form-control' : 'form-control'"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('description')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row">
@@ -52,26 +61,44 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Prep Time:</label>
-                                    <input type="text" class="form-control" th:field="*{prepTime}"/>
+                                    <label for="prepTime">Prep Time:</label>
+                                    <input id="prepTime" type="text" class="form-control" th:field="*{prepTime}"
+                                           th:class="${#fields.hasErrors('prepTime')} ? 'is-invalid form-control' : 'form-control'"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('prepTime')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Cook time:</label>
-                                    <input type="text" class="form-control" th:field="*{cookTime}"/>
+                                    <input type="text" class="form-control" th:field="*{cookTime}"
+                                           th:class="${#fields.hasErrors('cookTime')} ? 'is-invalid form-control' : 'form-control'"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('cookTime')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="difficultyValue: ${T(com.hgsachin.springrecipedemo.domain.Difficulty).values()}"
+                                                th:value="${difficultyValue.name()}"
+                                                th:text="${difficultyValue.name()}">Easy</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Servings:</label>
-                                    <input type="text" class="form-control" th:field="*{servings}"/>
+                                    <input type="text" class="form-control" th:field="*{servings}"
+                                           th:class="${#fields.hasErrors('servings')} ? 'is-invalid form-control' : 'form-control'"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('servings')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('servings')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Source:</label>
@@ -79,7 +106,13 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>URL:</label>
-                                    <input type="text" class="form-control" th:field="*{url}"/>
+                                    <input type="text" class="form-control" th:field="*{url}"
+                                           th:class="${#fields.hasErrors('url')} ? 'is-invalid form-control' : 'form-control'"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('url')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -117,8 +150,16 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <textarea class="form-control" rows="3" th:field="*{directions}"></textarea></div>
+                                <div class="col-md-3 form-group">
+                                    <textarea class="form-control" rows="3" th:field="*{directions}"
+                                              th:class="${#fields.hasErrors('directions')} ? 'is-invalid form-control' : 'form-control'"></textarea>
+                                    <span class="help-block" th:if="${#fields.hasErrors('directions')}">
+                                        <ul>
+                                            <li class="text-danger" th:each="err : ${#fields.errors('directions')}"
+                                                th:text="${err}"></li>
+                                        </ul>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -139,6 +180,7 @@
             </form>
         </div>
     </div>
+    <a class="btn btn-info" href="/">Home</a>
 </div>
 </body>
 </html>

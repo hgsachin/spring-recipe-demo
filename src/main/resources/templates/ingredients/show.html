@@ -28,12 +28,13 @@
             <td th:text="${ingredient.id}">NA</td>
             <td th:text="${ingredient.description}">NA</td>
             <td th:text="${ingredient.amount + ' ' + ingredient.unitOfMeasure.unitOfMeasure}">NO Data</td>
-            <!--<td><a th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/show'}">View</a></td>
-            <td><a th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update'}">Update</a></td>
-            <td><a th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>-->
+            <td><a th:href="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient/' + ${ingredient.id} + '/show'}">View</a></td>
+            <td><a th:href="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient/' + ${ingredient.id} + '/update'}">Update</a></td>
+            <td><a th:href="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient/' + ${ingredient.id} + '/delete'}">Delete</a></td>
         </tr>
     </table>
-    <a class="btn btn-success" href="/recipe/new">Add New Ingredient</a>
+    <a class="btn btn-success" th:href="${'/recipe/' + ingredient.recipeId + '/ingredient/new'}">Add New Ingredient</a>
+    <a class="btn btn-info" href="/">Home</a>
 </div>
 </body>
 </html>
